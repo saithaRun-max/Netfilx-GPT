@@ -1,15 +1,12 @@
-
-import './App.css'
+import "./App.css";
+import Body from "./components/Body";
 
 function App() {
-
-
   return (
     <>
-    <h1 className='font-semibold text-3xl'>hello</h1>
-      
+      <Body />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
