@@ -3,8 +3,11 @@ import Header from "./Header";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { checkValidData } from "../utils/validate";
+import { useNavigate } from "react-router-dom";
+import Browse from "./Browse";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [validStatus, setVlidStatus] = useState(null);
 
@@ -27,7 +30,8 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user);
+
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -43,6 +47,8 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
+          navigate("/browse");
+
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -63,7 +69,7 @@ const Login = () => {
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/c0b69670-89a3-48ca-877f-45ba7a60c16f/2642e08e-4202-490e-8e93-aff04881ee8a/IN-en-20240212-popsignuptwoweeks-perspective_alpha_website_small.jpg"
           alt="bg-image"
-          className=""
+          className="xl:h-screen xl:w-screen sm:h-[700px] sm:w-[900px]"
         />
       </div>
 
