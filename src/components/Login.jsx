@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 import { checkValidData } from "../utils/validate";
 
 const Login = () => {
@@ -12,7 +14,42 @@ const Login = () => {
   const mobileNumber = useRef(null);
 
   const handleButtonClick = () => {
-    setVlidStatus(checkValidData(email.current.value, password.current.value ));
+    const message = checkValidData(email.current.value, password.current.value);
+    setVlidStatus(message);
+
+    if (message) return;
+
+    if (!isSignInForm) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setVlidStatus(errorCode + "-" + errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setVlidStatus(errorCode + "-" + errorMessage);
+        });
+    }
   };
 
   const handleToggleSignIn = () => {
@@ -26,7 +63,7 @@ const Login = () => {
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/c0b69670-89a3-48ca-877f-45ba7a60c16f/2642e08e-4202-490e-8e93-aff04881ee8a/IN-en-20240212-popsignuptwoweeks-perspective_alpha_website_small.jpg"
           alt="bg-image"
-          className="h-full w-full"
+          className=""
         />
       </div>
 
@@ -45,14 +82,12 @@ const Login = () => {
               <input
                 className=" bg-slate-500 placeholder:text-indigo-100 text-white font-medium w-full  p-3 mb-5  rounded-sm"
                 type="text"
-                ref={fullName}
                 placeholder="Enter Full Name"
               />
 
               <input
                 className=" bg-slate-500 placeholder:text-indigo-100 text-white font-medium w-full p-3 mb-5  rounded-sm"
                 type="text"
-                ref={phoneNumber}
                 placeholder="Enter Phone Number"
               />
             </div>
