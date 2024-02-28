@@ -1,6 +1,10 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword ,updateProfile} from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { checkValidData } from "../utils/validate";
 import { useNavigate } from "react-router-dom";
@@ -31,14 +35,17 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
 
-          updateProfile(auth.currentUser, {
-            displayName: fullName.current.value, photoURL: "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png",
-          }).then(() => {
-           navigate("/browse")
-          }).catch((error) => {
-            setVlidStatus(error.message);
-          });
-         
+          updateProfile(user, {
+            photoURL:
+              "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png",
+            displayName: fullName.current.value,
+          })
+            .then(() => {
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setVlidStatus(error.message);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -55,7 +62,6 @@ const Login = () => {
           const user = userCredential.user;
           console.log(user);
           navigate("/browse");
-
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -93,7 +99,7 @@ const Login = () => {
           {!isSignInForm ? (
             <div className="">
               <input
-              ref={fullName}
+                ref={fullName}
                 className=" bg-slate-500 placeholder:text-indigo-100 text-white font-medium w-full  p-3 mb-5  rounded-sm"
                 type="text"
                 placeholder="Enter Full Name"

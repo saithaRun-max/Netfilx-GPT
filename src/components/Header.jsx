@@ -3,9 +3,11 @@ import { FiLogOut } from "react-icons/fi";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
+  const user = useSelector(store => store.user);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -29,18 +31,25 @@ https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-05
           />
         </div>
 
-        <div className="flex absolute top-4 left-3/4 sm:ml-14 xl:ml-32">
+       {user && 
+        <div className="flex absolute top-4 left-3/4  xl:ml-32">
+         
+        <div className="ml-14">
+          
           <img
-            className="w-10 mx-2"
-            src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?20201013161117"
+            className="w-10 mx-2 h-10"
+            src={user?.photoURL}
           />
-          <button
-            onClick={handleSignOut}
-            className="border text-white p-1 px-2"
-          >
-            Sign Out
-          </button>
+           <span className="text-white">{user?.displayName}</span>
         </div>
+        <button
+          onClick={handleSignOut}
+          className="border text-white  px-2"
+        >
+          Out
+        </button>
+      </div>
+       } 
       </div>
     </>
   );
