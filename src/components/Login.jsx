@@ -9,9 +9,13 @@ import { auth } from "../utils/firebase";
 import { checkValidData } from "../utils/validate";
 import { useNavigate } from "react-router-dom";
 import Browse from "./Browse";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [validStatus, setVlidStatus] = useState(null);
 
@@ -41,6 +45,16 @@ const Login = () => {
             displayName: fullName.current.value,
           })
             .then(() => {
+              const {uid, email, displayName, photoURL } = auth.currentUser;
+
+        dispatch(
+          addUser({
+            uid:uid,
+            email:email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
               navigate("/browse");
             })
             .catch((error) => {
