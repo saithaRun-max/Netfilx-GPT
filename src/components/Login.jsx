@@ -1,17 +1,16 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
+import { auth } from "../utils/firebase";
+import { checkValidData } from "../utils/validate";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { Bg_Img } from "../utils/constants";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import { checkValidData } from "../utils/validate";
-import { useNavigate } from "react-router-dom";
-import Browse from "./Browse";
-import { useDispatch } from "react-redux";
-import { addUser } from "../utils/userSlice";
-
 
 const Login = () => {
   const navigate = useNavigate();
@@ -40,21 +39,20 @@ const Login = () => {
           const user = userCredential.user;
 
           updateProfile(user, {
-            photoURL:
-              "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png",
+            photoURL:UserAvtar ,
             displayName: fullName.current.value,
           })
             .then(() => {
-              const {uid, email, displayName, photoURL } = auth.currentUser;
+              const { uid, email, displayName, photoURL } = auth.currentUser;
 
-        dispatch(
-          addUser({
-            uid:uid,
-            email:email,
-            displayName: displayName,
-            photoURL: photoURL,
-          })
-        );
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
               navigate("/browse");
             })
             .catch((error) => {
@@ -94,7 +92,7 @@ const Login = () => {
       <Header />
       <div className=" ">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/c0b69670-89a3-48ca-877f-45ba7a60c16f/2642e08e-4202-490e-8e93-aff04881ee8a/IN-en-20240212-popsignuptwoweeks-perspective_alpha_website_small.jpg"
+          src={Bg_Img}
           alt="bg-image"
           className="xl:h-screen xl:w-screen sm:h-[700px] sm:w-[900px]"
         />
