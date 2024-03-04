@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +35,7 @@ const Header = () => {
   }, []);
 
   const handleSignOut = () => {
-    signOut(auth) 
+    signOut(auth)
       .then(() => {})
       .catch((error) => {
         navigate("/error");

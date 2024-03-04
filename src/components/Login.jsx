@@ -39,7 +39,7 @@ const Login = () => {
           const user = userCredential.user;
 
           updateProfile(user, {
-            photoURL:UserAvtar ,
+            photoURL: UserAvtar,
             displayName: fullName.current.value,
           })
             .then(() => {
@@ -73,7 +73,6 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
-      
         })
         .catch((error) => {
           const errorCode = error.code;
