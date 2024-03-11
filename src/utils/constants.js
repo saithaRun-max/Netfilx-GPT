@@ -6,9 +6,10 @@ export const Bg_Img ="https://assets.nflxext.com/ffe/siteui/vlv3/c0b69670-89a3-4
 
 
 export const API_OPTIONS = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxNWYxN2RlNGU4ZTM3YzA1MDNhNmM4Y2ZhYjI4ZmU1YyIsInN1YiI6IjY1ZTAxNzkxODgwYzkyMDE4NjI3NGQ5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sscHPZ__0j_nFr_GbsNO6QAJCrdKGlQH_IMyUonxiLg'
-    }
-  }; 
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNDBiYmI2MWY0ZTE3Mjc3Y2JkZTM2YzQ3NGE5NWY4YiIsInN1YiI6IjY1ZTAxNzkxODgwYzkyMDE4NjI3NGQ5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.UtA7m6RF-TpD1z3mDO76J-LjcdeVBu7S8RQ3q3yKXOg'
+  }
+};
+  
