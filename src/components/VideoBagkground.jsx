@@ -9,23 +9,22 @@ const VideoBagkground = ({ movieId }) => {
 
   const getMovieVideos = async () => {
     const data = await fetch(
-      // `https://api.themoviedb.org/3/movie/${movieId}videos?language=en-US`,
-      // API_OPTIONS
-      `https://api.themoviedb.org/3/find/${movieId}?external_source=`, API_OPTIONS
+      "https://api.themoviedb.org/3/movie/1096197/videos?language=en-US",
+      API_OPTIONS
     );
 
-    console.log(data)
-    // const json = await data.json();
+    const json = await data.json();
 
-    // const filterData = await json.results.filter(
-    //   (video) => video.type === "Trailer"
-    // );
-
-    //if no trailer takes 1st video
-    // const trailer = filterData.length ? filterData[0] : json?.results[0];
+    const filterData = await json.results.filter(
+      (video) => video.type === "Trailer"
+    );
 
     // const trailer = filterData[0] ;
-   
+
+    //if no trailer takes 1st video
+    const trailer = filterData.length ? filterData[0] : json?.results[0];
+
+    dispatch(addTrailerVideo(trailer));
   };
 
   useEffect(() => {
@@ -33,11 +32,17 @@ const VideoBagkground = ({ movieId }) => {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <iframe
-        src={"https://www.youtube.com/embed/" + trailerVideo?.key}
+        className="w-screen aspect-video"
+        src={
+          "https://www.youtube.com/embed/" +
+          trailerVideo?.key +
+          "?&autoplay=1&mute=1"
+        }
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen 
       ></iframe>
     </div>
   );

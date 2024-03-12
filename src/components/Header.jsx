@@ -45,7 +45,7 @@ const Header = () => {
   return (
     <>
       <div className="flex justify-between">
-        <div className="absolute h-24 w-screen bg-gradient-to-b from-black">
+        <div className="absolute top-0 z-10 h-16 w-screen bg-gradient-to-b from-black">
           <img className="w-44  left-5 top-4 " src={LOGO} alt="logo" />
         </div>
 
