@@ -44,8 +44,8 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex justify-between">
-        <div className="absolute top-0 z-10 h-16 w-screen bg-gradient-to-b from-black">
+      <div className="flex absolute top-0 z-10 justify-between">
+        <div className=" h-16 w-screen bg-gradient-to-b from-black">
           <img className="w-44  left-5 top-4 " src={LOGO} alt="logo" />
         </div>
 
@@ -55,7 +55,7 @@ const Header = () => {
               <img className="w-10 mx-2 h-10" src={user?.photoURL} />
               <span className="text-white">{user?.displayName}</span>
             </div>
-            <button onClick={handleSignOut} className="border text-white  px-2">
+            <button onClick={handleSignOut} className="border text-white px-2">
               Out
             </button>
           </div>
