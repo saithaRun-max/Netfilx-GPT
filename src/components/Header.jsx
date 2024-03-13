@@ -55,7 +55,7 @@ const Header = () => {
               <img className="w-10 mx-2 h-10" src={user?.photoURL} />
               <span className="text-white">{user?.displayName}</span>
             </div>
-            <button onClick={handleSignOut} className="border text-white px-2">
+            <button onClick={handleSignOut} className="border sm:text-black bg-white text-white px-2">
               Out
             </button>
           </div>
