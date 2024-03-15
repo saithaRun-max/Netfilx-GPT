@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 const SecondaryContainer = () => {
   const movies = useSelector((store) => store.movies);
   return (
+    // if movies present then execute
     movies && (
       <div className="bg-black w-screen ">
         <div className="lg:-mt-56  relative z-10">

@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex absolute top-0 z-10 justify-between">
+      {/* <div className="flex absolute top-0 z-10 justify-between">
         <div className=" h-16 w-screen bg-gradient-to-b from-black">
           <img className="w-44  left-5 top-4 " src={LOGO} alt="logo" />
         </div>
@@ -56,6 +56,24 @@ const Header = () => {
               <span className="text-white">{user?.displayName}</span>
             </div>
             <button onClick={handleSignOut} className="border sm:text-black bg-white text-white px-2">
+              Out
+            </button>
+          </div>
+        )}
+      </div> */}
+      <div className="absolute z-10 grid grid-cols-12 bg-opacity-10 w-screen px-10">
+        <div className="col-span-9">
+          <img className="w-44" src={LOGO} alt="logo" />
+        </div>
+
+        {user && (
+          <div className="col-span-3 flex align-middle py-4 mx-8 ">
+            <button  className=" h-12 px-2 bg-slate-500 text-white rounded-sm border">GPT Search</button>
+            <div className="">
+              <img className="w-28" src={user?.photoURL} />
+             
+            </div>
+            <button onClick={handleSignOut} className=" h-12 px-8 text-white rounded-sm bg-slate-700">
               Out
             </button>
           </div>

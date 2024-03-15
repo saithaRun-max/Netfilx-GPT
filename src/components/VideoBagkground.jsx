@@ -32,7 +32,7 @@ const VideoBagkground = ({ movieId }) => {
   }, []);
 
   return (
-    <div className="lg:-mt-32 ">
+    <div className="">
       <iframe
         className="w-screen aspect-video"
         src={
