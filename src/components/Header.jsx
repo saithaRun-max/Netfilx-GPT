@@ -7,11 +7,13 @@ import { LOGO } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const gptStatus = useSelector((store)=> store.gpt.showGptSearch)
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -42,6 +44,10 @@ const Header = () => {
       });
   };
 
+  const handleGptSearchClick = () => {
+    dispatch(toggleGptSearchView());
+  };
+
   return (
     <>
       {/* <div className="flex absolute top-0 z-10 justify-between">
@@ -61,19 +67,24 @@ const Header = () => {
           </div>
         )}
       </div> */}
-      <div className="absolute z-10 grid grid-cols-12 bg-opacity-10 w-screen px-10">
-        <div className="col-span-9">
-          <img className="w-44" src={LOGO} alt="logo" />
-        </div>
+      <div className="absolute z-10 flex justify-between bg-gradient-to-t from-black w-screen px-8 py-2 bg-opacity-10">
+        <img className="w-36" src={LOGO} alt="logo" />
 
         {user && (
-          <div className="col-span-3 flex align-middle py-4 mx-8 ">
-            <button  className=" h-12 px-2 bg-slate-500 text-white rounded-sm border">GPT Search</button>
-            <div className="">
-              <img className="w-28" src={user?.photoURL} />
-             
-            </div>
-            <button onClick={handleSignOut} className=" h-12 px-8 text-white rounded-sm bg-slate-700">
+          <div className="flex align-middle p-2">
+            <button
+              onClick={handleGptSearchClick}
+              className=" h-12 px-2 bg-slate-500 text-white rounded-sm border"
+            >
+             { gptStatus ? "Homepage" : "GPT Search"}
+            </button>
+
+            <img className="w-28" src={user?.photoURL} />
+
+            <button
+              onClick={handleSignOut}
+              className=" h-12 px-8 text-white rounded-sm bg-slate-700"
+            >
               Out
             </button>
           </div>
